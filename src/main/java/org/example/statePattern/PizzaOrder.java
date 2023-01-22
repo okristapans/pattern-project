@@ -23,11 +23,16 @@ public class PizzaOrder {
 
     public void makeOrder() {
         state.makeOrder(this);
+        setState(this.state);
+        state.makeOrder(this);
         maker.makePizza();
         if (decorator != null) {
             System.out.println("Adding decorator: " + decorator.getDescription());
         }
+        setState(this.state);
+        state.makeOrder(this);
         System.out.println("Total cost: $" + (decorator != null ? decorator.getCost() : maker.createFactory().createPizza().getCost()));
+        this.state = new CompletedState();
     }
 }
 
